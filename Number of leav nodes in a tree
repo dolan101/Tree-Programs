@@ -1,0 +1,68 @@
+#include<stdio.h>
+#include<stdlib.h>
+int count=0;
+struct Node{
+    char data;
+    struct Node*left;
+    struct Node*right;
+    };
+
+struct Node*newnode(char data)
+    {
+    struct Node*new=(struct Node*)malloc(sizeof(struct Node));
+    new->data=data;
+    new->left=NULL;
+    new->right=NULL;
+    return(new);
+    }
+    
+void Inorder(struct Node*root)
+    {
+    if(!root)
+        return;
+    
+    Inorder(root->left);
+    if(root->left==NULL && root->right==NULL)
+        count++;
+        
+    Inorder(root->right);
+    }
+//void Preorder(struct Node*root)
+//{
+    //if(root==NULL)
+       // return;
+     
+     //printf("%c",root->data);
+    //Preorder(root->left);
+    //Preorder(root->right);
+   // }
+    
+//void Postorder(struct Node*root)
+//{
+  //  if(!root)
+    //    return;
+    
+    //Postorder(root->left);
+    //Postorder(root->right);
+    //printf("%c",root->data);
+    //}
+     
+  int main()
+  {
+  struct Node*root;
+  root=newnode('+');
+  root->left=newnode('*');
+  root->right  =newnode('c');
+  root->left->left=newnode('a');
+  root->left->right=newnode('b');
+  //root->right->left=newnode(6);
+  //root->right->right=newnode(7);
+  Inorder(root);
+ // printf("\n");
+  //Preorder(root);
+  //printf("\n");
+  //Postorder(root);
+  printf("%d",count);
+  return 0;
+  
+  }
