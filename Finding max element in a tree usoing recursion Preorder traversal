@@ -1,0 +1,73 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Node{
+    int data;
+    struct Node*left;
+    struct Node*right;
+    };
+
+struct Node*newnode(char data)
+    {
+    struct Node*new=(struct Node*)malloc(sizeof(struct Node));
+    new->data=data;
+    new->left=NULL;
+    new->right=NULL;
+    return(new);
+    }
+ 
+ //THIS ARE NOT IMPORTANT 
+/*void Inorder(struct Node*root)
+    {
+    if(!root)
+        return;
+    
+    Inorder(root->left);
+    printf("%c",root->data);        
+    Inorder(root->right);
+    }*/
+int FindMaxTree(struct Node*root)
+{
+	int root_val,left,right,max;
+    if(root==NULL)
+        return;
+     
+     root_val=root->data;
+     left=FindMaxTree(root->left);
+     right=FindMaxTree(root->right);
+     if(left>right)
+     	max=left;
+     else
+     	max=right;
+     	
+    if(root_val>max)
+    	max=root_val;
+    
+    return max; 
+    }
+ //THIS ARE NOT IMPORTANT.  
+/*void Postorder(struct Node*root)
+{
+    if(!root)
+        return;
+    
+    Postorder(root->left);
+    Postorder(root->right);
+    printf("%c",root->data);
+    }*/
+     
+  int main()
+  {
+  struct Node*root;
+  root=newnode(7);
+  root->left=newnode(100);
+  root->right  =newnode(4);
+  root->left->left=newnode(1);
+  root->left->right=newnode(24);
+  root->right->left=newnode(101);
+  root->right->right=newnode(47);
+  printf("Max element of the given tree is\t");
+  printf("%d\n",FindMaxTree(root));
+ 
+ return 0;
+  }
